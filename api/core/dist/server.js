@@ -20,8 +20,6 @@ app.get('/', function (req, res) {
 app.get('/teste', (req, res) => {
     const service = new SessionService_1.SessionService();
     let allSessions = service.getAllSessions();
-    // Output the book to the console for debugging
-    allSessions.then(a => console.log(a));
     allSessions.then(a => res.send(a));
 });
 if (!module.parent) {
