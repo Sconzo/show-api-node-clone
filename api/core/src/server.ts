@@ -18,15 +18,6 @@ app.get('/', function(req:any, res:any){
   res.send('Hello!');
 });
 
-app.get('/teste', (req, res) => {
-  const service = new SessionService();
-
-  let allSessions = service.getAllSessions();
-
-  allSessions.then( a => res.send(a))
-});
-
-
 if (!module.parent) {
   app.listen(port);
   console.log('Express started on port 3000');
