@@ -10,7 +10,7 @@ const port = process.env.PORT || 3000;
 const cors = require('cors');
 
 const corsOpts = {
-  origin: '*',
+  origin: 'https://great-volleyball-gold-ireland.bohr.io',
   methods: [
     'GET',
     'POST',
