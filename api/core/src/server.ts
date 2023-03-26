@@ -10,12 +10,10 @@ const port = process.env.PORT || 3000;
 const cors = require('cors');
 
 app.use(cors());
+app.options('*', cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use('/',routes)
-app.use(cors({
-  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
-  origin: true }))
 
 app.get('/', function(req:any, res:any){
   res.send('Hello!');
