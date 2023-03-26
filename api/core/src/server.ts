@@ -13,19 +13,13 @@ app.use(cors());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use('/',routes)
+app.use(cors({
+  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
+  origin: true }))
 
 app.get('/', function(req:any, res:any){
   res.send('Hello!');
 });
-
-app.get('/teste', (req, res) => {
-  const service = new SessionService();
-
-  let allSessions = service.getAllSessions();
-
-  allSessions.then( a => res.send(a))
-});
-
 
 if (!module.parent) {
   app.listen(port);
