@@ -9,18 +9,7 @@ const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000;
 const cors = require('cors');
 
-const corsOpts = {
-  origin: 'https://great-volleyball-gold-ireland.bohr.io',
-  methods: [
-    'GET',
-    'POST',
-  ],
-  allowedHeaders: [
-    'Content-Type',
-  ]
-};
-
-app.use(cors(corsOpts));
+app.use(cors());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use('/',routes)
