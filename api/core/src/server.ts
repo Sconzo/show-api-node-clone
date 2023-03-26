@@ -1,7 +1,5 @@
-
 import express from 'express';
 import {routes} from "./routes";
-import {SessionService} from "./modules/session/SessionService";
 
 
 const app = express();
@@ -10,6 +8,7 @@ const port = process.env.PORT || 3000;
 const cors = require('cors');
 
 const corsOptions = {
+  origin : ["https://great-volleyball-gold-ireland.bohr.io", "http://localhost:5173"],
   allowedHeaders : "Content-Type",
   methods: ["GET","POST"]
 };
