@@ -9,8 +9,18 @@ const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000;
 const cors = require('cors');
 
-app.use(cors());
-app.options('*', cors());
+const corsOpts = {
+  origin: '*',
+  methods: [
+    'GET',
+    'POST',
+  ],
+  allowedHeaders: [
+    'Content-Type',
+  ]
+};
+
+app.use(cors(corsOpts));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use('/',routes)
