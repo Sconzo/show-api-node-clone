@@ -10,7 +10,7 @@ const cors = require('cors');
 app.use(cors());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
-app.use('/',routes)
+app.use('/', cors() ,routes)
 
 app.get('/', cors() ,function(req:any, res:any){
   res.send('Hello!');

@@ -13,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', routes_1.routes);
-app.get('/', function (req, res) {
+app.get('/', cors(), function (req, res) {
     res.send('Hello!');
 });
 if (!module.parent) {
