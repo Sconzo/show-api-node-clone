@@ -15,7 +15,7 @@ app.use(cors({
   methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
   origin: true }))
 
-app.get('/', function(req:any, res:any){
+app.get('/', cors() ,function(req:any, res:any){
   res.send('Hello!');
 });
 
