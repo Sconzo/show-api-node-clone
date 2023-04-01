@@ -41,13 +41,19 @@ class SessionService {
     }
     getAllSessions() {
         return __awaiter(this, void 0, void 0, function* () {
-            const sessionList = yield client_1.prisma.session.findMany({});
-            let sessionResponseList = [];
-            for (let session of sessionList) {
-                let sessionResponse = this.entityToResponse(session);
-                sessionResponseList.push(sessionResponse);
+            try {
+                const sessionList = yield client_1.prisma.session.findMany({});
+                let sessionResponseList = [];
+                for (let session of sessionList) {
+                    let sessionResponse = this.entityToResponse(session);
+                    sessionResponseList.push(sessionResponse);
+                }
+                return sessionResponseList;
             }
-            return sessionResponseList;
+            catch (error) {
+                console.error(error);
+                throw error;
+            }
         });
     }
     getNumberQuestionsCreated(sessionId) {

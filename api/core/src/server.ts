@@ -1,7 +1,5 @@
-
 import express from 'express';
 import {routes} from "./routes";
-import {SessionService} from "./modules/session/SessionService";
 
 
 const app = express();
@@ -10,12 +8,11 @@ const port = process.env.PORT || 3000;
 const cors = require('cors');
 
 app.use(cors());
-app.options('*', cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use('/',routes)
 
-app.get('/', function(req:any, res:any){
+app.get('/', cors() ,function(req:any, res:any){
   res.send('Hello!');
 });
 

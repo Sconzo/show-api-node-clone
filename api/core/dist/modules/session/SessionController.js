@@ -31,8 +31,14 @@ class SessionController {
     }
     getAllSessionsHandle(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield service.getAllSessions();
-            res.status(200).json(result);
+            try {
+                const result = yield service.getAllSessions();
+                res.status(200).json(result);
+            }
+            catch (error) {
+                console.error(error);
+                res.status(500).json("Error while fetching Sessions");
+            }
         });
     }
     getNumberQuestionsCreatedHandle(req, res) {

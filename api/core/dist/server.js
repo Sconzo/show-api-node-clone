@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const routes_1 = require("./routes");
-const SessionService_1 = require("./modules/session/SessionService");
 const app = (0, express_1.default)();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
@@ -16,11 +15,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', routes_1.routes);
 app.get('/', function (req, res) {
     res.send('Hello!');
-});
-app.get('/teste', (req, res) => {
-    const service = new SessionService_1.SessionService();
-    let allSessions = service.getAllSessions();
-    allSessions.then(a => res.send(a));
 });
 if (!module.parent) {
     app.listen(port);
