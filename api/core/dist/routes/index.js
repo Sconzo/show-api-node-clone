@@ -7,6 +7,8 @@ const challenger_route_1 = require("./challenger.route");
 const question_routes_1 = require("./question.routes");
 const routes = (0, express_1.Router)();
 exports.routes = routes;
+const cors = require('cors');
+routes.use(cors());
 routes.use("/session", session_route_1.sessionRoute);
 routes.use("/challenger", challenger_route_1.challengerRoute);
 routes.use("/question", question_routes_1.questionRoute);
