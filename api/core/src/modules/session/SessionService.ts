@@ -17,10 +17,9 @@ export class SessionService {
         //     console.log("Nome da sessão repetido")
         //     throw new AppError("Session name already exists",401)
         // }
-        console.log("Trying to create session")
-        console.log(req)
+        console.log("Trying to create session: " + req.sessionName)
         try {
-            return prisma.session.create({
+            const sessionCreated = await prisma.session.create({
                 data: {
                     sessionName: req.sessionName,
                     numberOfQuestions: parseInt(<string><unknown>req.numberOfQuestions),
@@ -32,6 +31,8 @@ export class SessionService {
                     audienceHelp: req.audienceHelp
                 }
             });
+            console.log("Session created with ID: " + sessionCreated.id)
+            return sessionCreated;
         } catch (error) {
             console.error(error);
             throw error;
