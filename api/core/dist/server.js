@@ -8,12 +8,10 @@ const routes_1 = require("./routes");
 const app = (0, express_1.default)();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
-const cors = require('cors');
-app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', routes_1.routes);
-app.get('/', cors(), function (req, res) {
+app.get('/', function (req, res) {
     res.send('Hello!');
 });
 if (!module.parent) {
