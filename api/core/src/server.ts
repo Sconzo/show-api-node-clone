@@ -5,14 +5,12 @@ import {routes} from "./routes";
 const app = express();
 const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000;
-const cors = require('cors');
 
-app.use(cors());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
-app.use('/', cors() ,routes)
+app.use('/',routes)
 
-app.get('/', cors() ,function(req:any, res:any){
+app.get('/' ,function(req:any, res:any){
   res.send('Hello!');
 });
 
