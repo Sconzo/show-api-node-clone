@@ -6,30 +6,36 @@ import {SessionResponse} from "./dtos/sessionResponse";
 
 export class SessionService {
     async createSession(req: CreateSessionRequest): Promise<Session> {
-        const sessionNameAlreadyExists = await prisma.session.findUnique({
-            where: {
-                sessionName : req.sessionName
-            }
-        })
+        // const sessionNameAlreadyExists = await prisma.session.findUnique({
+        //     where: {
+        //         sessionName : req.sessionName
+        //     }
+        // })
 
         // if(sessionNameAlreadyExists){
         //     console.log("Nome da sessão repetido")
         //     console.log("Nome da sessão repetido")
         //     throw new AppError("Session name already exists",401)
         // }
-
-        return prisma.session.create({
-            data: {
-                sessionName : req.sessionName,
-                numberOfQuestions : parseInt(<string><unknown>req.numberOfQuestions),
-                numberOfGroups : parseInt(<string><unknown>req.numberOfGroups),
-                numberOfChallengers : parseInt(<string><unknown>req.numberOfChallengers),
-                cards : req.cards,
-                studentsHelp : req.studentsHelp,
-                skips : req.skips,
-                audienceHelp : req.audienceHelp
-            }
-        });
+        console.log("Trying to create session")
+        console.log(req)
+        try {
+            return prisma.session.create({
+                data: {
+                    sessionName: req.sessionName,
+                    numberOfQuestions: parseInt(<string><unknown>req.numberOfQuestions),
+                    numberOfGroups: parseInt(<string><unknown>req.numberOfGroups),
+                    numberOfChallengers: parseInt(<string><unknown>req.numberOfChallengers),
+                    cards: req.cards,
+                    studentsHelp: req.studentsHelp,
+                    skips: req.skips,
+                    audienceHelp: req.audienceHelp
+                }
+            });
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
 
     async getAllSessions(): Promise<SessionResponse[]> {
@@ -47,7 +53,6 @@ export class SessionService {
             throw error;
         }
     }
-
 
 
     async getNumberQuestionsCreated(sessionId: number): Promise<number> {
