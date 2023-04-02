@@ -34,7 +34,7 @@ export class SessionService {
             if(sessionCreated.id) {
                 console.log("Session created with ID: " + sessionCreated.id)
             } else {
-                throw new Error("Session could not be created");
+                console.log("Session could not be created");
             }
             return sessionCreated;
         } catch (error) {

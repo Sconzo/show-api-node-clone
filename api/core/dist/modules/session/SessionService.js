@@ -15,28 +15,42 @@ const AppError_1 = require("../../errors/AppError");
 class SessionService {
     createSession(req) {
         return __awaiter(this, void 0, void 0, function* () {
-            const sessionNameAlreadyExists = yield client_1.prisma.session.findUnique({
-                where: {
-                    sessionName: req.sessionName
-                }
-            });
+            // const sessionNameAlreadyExists = await prisma.session.findUnique({
+            //     where: {
+            //         sessionName : req.sessionName
+            //     }
+            // })
             // if(sessionNameAlreadyExists){
             //     console.log("Nome da sessão repetido")
             //     console.log("Nome da sessão repetido")
             //     throw new AppError("Session name already exists",401)
             // }
-            return client_1.prisma.session.create({
-                data: {
-                    sessionName: req.sessionName,
-                    numberOfQuestions: parseInt(req.numberOfQuestions),
-                    numberOfGroups: parseInt(req.numberOfGroups),
-                    numberOfChallengers: parseInt(req.numberOfChallengers),
-                    cards: req.cards,
-                    studentsHelp: req.studentsHelp,
-                    skips: req.skips,
-                    audienceHelp: req.audienceHelp
+            console.log("Trying to create session: " + req.sessionName);
+            try {
+                const sessionCreated = yield client_1.prisma.session.create({
+                    data: {
+                        sessionName: req.sessionName,
+                        numberOfQuestions: parseInt(req.numberOfQuestions),
+                        numberOfGroups: parseInt(req.numberOfGroups),
+                        numberOfChallengers: parseInt(req.numberOfChallengers),
+                        cards: req.cards,
+                        studentsHelp: req.studentsHelp,
+                        skips: req.skips,
+                        audienceHelp: req.audienceHelp
+                    }
+                });
+                if (sessionCreated.id) {
+                    console.log("Session created with ID: " + sessionCreated.id);
                 }
-            });
+                else {
+                    throw new Error("Session could not be created");
+                }
+                return sessionCreated;
+            }
+            catch (error) {
+                console.error(error);
+                throw error;
+            }
         });
     }
     getAllSessions() {
