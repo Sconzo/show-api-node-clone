@@ -31,6 +31,7 @@ export class SessionController {
             return res.status(201).json(result);
 
         } catch (error) {
+            console.log(error)
             next(error);
         }
 
