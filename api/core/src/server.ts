@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
-const allowedOrigins = ['http://localhost:3000', 'http://localhost:8080'];
+const allowedOrigins = ['http://localhost:3000', 'https://great-volleyball-gold-ireland.bohr.io'];
 type CorsCallback = (error: Error | null, success: boolean) => void;
 app.use(cors({
   origin: function (origin : string, callback: CorsCallback) {
