@@ -1,11 +1,11 @@
-import {Request, Response} from "express";
+import {NextFunction, Request, Response} from "express";
 import {SessionService} from "./SessionService";
 
 const service = new SessionService();
 
 export class SessionController {
 
-    async createSessionHandle(req: Request, res: Response) {
+    async createSessionHandle(req: Request, res: Response, next: NextFunction) {
         const {
             sessionName,
             numberOfQuestions,
@@ -17,19 +17,23 @@ export class SessionController {
             audienceHelp
         } = req.body;
 
+        try {
+            const result = service.createSession({
+                sessionName,
+                numberOfQuestions,
+                numberOfGroups,
+                numberOfChallengers,
+                cards,
+                studentsHelp,
+                skips,
+                audienceHelp
+            })
+            return res.status(201).json(result);
 
-        const result = service.createSession({
-            sessionName,
-            numberOfQuestions,
-            numberOfGroups,
-            numberOfChallengers,
-            cards,
-            studentsHelp,
-            skips,
-            audienceHelp
-        })
+        } catch (error) {
+            next(error);
+        }
 
-        return res.status(201).json(result);
     }
 
     async getAllSessionsHandle(req: Request, res: Response) {
