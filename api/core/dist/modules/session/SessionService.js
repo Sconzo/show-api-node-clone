@@ -26,30 +26,28 @@ class SessionService {
             //     throw new AppError("Session name already exists",401)
             // }
             console.log("Trying to create session: " + req.sessionName);
-            try {
-                const sessionCreated = yield client_1.prisma.session.create({
-                    data: {
-                        sessionName: req.sessionName,
-                        numberOfQuestions: parseInt(req.numberOfQuestions),
-                        numberOfGroups: parseInt(req.numberOfGroups),
-                        numberOfChallengers: parseInt(req.numberOfChallengers),
-                        cards: req.cards,
-                        studentsHelp: req.studentsHelp,
-                        skips: req.skips,
-                        audienceHelp: req.audienceHelp
-                    }
-                });
-                if (sessionCreated.id) {
-                    console.log("Session created with ID: " + sessionCreated.id);
+            debugger;
+            const sessionCreated = yield client_1.prisma.session.create({
+                data: {
+                    sessionName: req.sessionName,
+                    numberOfQuestions: parseInt(req.numberOfQuestions),
+                    numberOfGroups: parseInt(req.numberOfGroups),
+                    numberOfChallengers: parseInt(req.numberOfChallengers),
+                    cards: req.cards,
+                    studentsHelp: req.studentsHelp,
+                    skips: req.skips,
+                    audienceHelp: req.audienceHelp
                 }
-                else {
-                    throw new Error("Session could not be created");
-                }
+            }).catch(e => {
+                console.log(e);
+            });
+            if (sessionCreated && sessionCreated.id) {
+                console.log("Session created with ID: " + sessionCreated.id);
                 return sessionCreated;
             }
-            catch (error) {
-                console.error(error);
-                throw error;
+            else {
+                console.log("Session could not be created");
+                throw new Error();
             }
         });
     }
