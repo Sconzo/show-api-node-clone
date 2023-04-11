@@ -11,10 +11,6 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
-app.use(cors({
-    origin: 'https://great-volleyball-gold-ireland.bohr.io'
-}));
-
 app.use('/', routes)
 
 app.get('/', function (req: any, res: any) {
