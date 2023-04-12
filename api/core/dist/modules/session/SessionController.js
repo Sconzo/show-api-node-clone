@@ -13,26 +13,33 @@ exports.SessionController = void 0;
 const SessionService_1 = require("./SessionService");
 const service = new SessionService_1.SessionService();
 class SessionController {
-    createSessionHandle(req, res) {
+    createSessionHandle(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const { sessionName, numberOfQuestions, numberOfGroups, numberOfChallengers, cards, studentsHelp, skips, audienceHelp } = req.body;
-            const result = service.createSession({
-                sessionName,
-                numberOfQuestions,
-                numberOfGroups,
-                numberOfChallengers,
-                cards,
-                studentsHelp,
-                skips,
-                audienceHelp
-            });
-            return res.status(201).json(result);
+            try {
+                const result = service.createSession({
+                    sessionName,
+                    numberOfQuestions,
+                    numberOfGroups,
+                    numberOfChallengers,
+                    cards,
+                    studentsHelp,
+                    skips,
+                    audienceHelp
+                });
+                return res.status(201).json(result);
+            }
+            catch (error) {
+                console.log(error);
+                next(error);
+            }
         });
     }
     getAllSessionsHandle(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const result = yield service.getAllSessions();
+                res.setHeader('Access-Control-Allow-Origin', 'https://great-volleyball-gold-ireland.bohr.io');
                 res.status(200).json(result);
             }
             catch (error) {

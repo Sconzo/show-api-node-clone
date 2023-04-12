@@ -26,28 +26,30 @@ class SessionService {
             //     throw new AppError("Session name already exists",401)
             // }
             console.log("Trying to create session: " + req.sessionName);
-            debugger;
-            const sessionCreated = yield client_1.prisma.session.create({
-                data: {
-                    sessionName: req.sessionName,
-                    numberOfQuestions: parseInt(req.numberOfQuestions),
-                    numberOfGroups: parseInt(req.numberOfGroups),
-                    numberOfChallengers: parseInt(req.numberOfChallengers),
-                    cards: req.cards,
-                    studentsHelp: req.studentsHelp,
-                    skips: req.skips,
-                    audienceHelp: req.audienceHelp
+            try {
+                const sessionCreated = yield client_1.prisma.session.create({
+                    data: {
+                        sessionName: req.sessionName,
+                        numberOfQuestions: parseInt(req.numberOfQuestions),
+                        numberOfGroups: parseInt(req.numberOfGroups),
+                        numberOfChallengers: parseInt(req.numberOfChallengers),
+                        cards: req.cards,
+                        studentsHelp: req.studentsHelp,
+                        skips: req.skips,
+                        audienceHelp: req.audienceHelp
+                    }
+                });
+                if (sessionCreated.id) {
+                    console.log("Session created with ID: " + sessionCreated.id);
                 }
-            }).catch(e => {
-                console.log(e);
-            });
-            if (sessionCreated && sessionCreated.id) {
-                console.log("Session created with ID: " + sessionCreated.id);
+                else {
+                    console.log("Session could not be created");
+                }
                 return sessionCreated;
             }
-            else {
-                console.log("Session could not be created");
-                throw new Error();
+            catch (error) {
+                console.error(error);
+                throw error;
             }
         });
     }
