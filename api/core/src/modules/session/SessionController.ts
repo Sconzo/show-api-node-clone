@@ -40,8 +40,6 @@ export class SessionController {
     async getAllSessionsHandle(req: Request, res: Response) {
         try {
             const result = await service.getAllSessions();
-            res.setHeader('Access-Control-Allow-Origin', 'https://great-volleyball-gold-ireland.bohr.io')
-            res.status(200).json(result);
         } catch (error) {
             console.error(error);
             res.status(500).json("Error while fetching Sessions");
