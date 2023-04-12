@@ -39,7 +39,6 @@ class SessionController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const result = yield service.getAllSessions();
-                res.setHeader('Access-Control-Allow-Origin', 'https://great-volleyball-gold-ireland.bohr.io');
                 res.status(200).json(result);
             }
             catch (error) {
