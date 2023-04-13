@@ -39,7 +39,7 @@ class SessionController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const result = yield service.getAllSessions();
-                res.status(200).json(result);
+                return res.status(200).json(result);
             }
             catch (error) {
                 console.error(error);

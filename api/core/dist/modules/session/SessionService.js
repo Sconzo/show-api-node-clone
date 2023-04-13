@@ -56,7 +56,9 @@ class SessionService {
     getAllSessions() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                console.log("Session List: ");
                 const sessionList = yield client_1.prisma.session.findMany({});
+                console.log(sessionList);
                 let sessionResponseList = [];
                 for (let session of sessionList) {
                     let sessionResponse = this.entityToResponse(session);
